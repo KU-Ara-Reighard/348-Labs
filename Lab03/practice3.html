@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <h1>
+        <div class="stretch">Password Page</div>
+    </h1>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+
+    <form>
+        <label for="password2">Please enter your new password: </label>
+        <input type="text" id="password1" name="password1" value=""> <br>
+        <div class="length_met">
+            <label for="password1">Please reenter your new password:</label>
+            <input type="text" id="password2" name="password2" value="">
+        </div>
+        
+    </form> 
+
+    <div id="match_text">
+
+    </div>
+
+    <div id="length_text">
+
+    </div>
+
+    </div>
+
+
+
+    <script>
+
+        document.getElementById("password1").oninput = function() {check_password_match(); check_password_length();};
+        document.getElementById("password2").oninput = function() {check_password_match(); check_password_length();};
+
+
+        function check_password_length() {
+            console.log(document.getElementById("password1"))
+            console.log(document.getElementById("password1").value.length)
+            if ((document.getElementById("password1").value.length < 8 && document.getElementById("password1").value.length != 0) || (document.getElementById("password2").value.length < 8 && document.getElementById("password2").value.length != 0)) {
+                document.getElementById("length_text").innerText = "Password must contain 8 characters minimum!";
+            }
+            else {
+                document.getElementById("length_text").innerText = "";
+            }
+        }
+
+        function check_password_match() {
+            if (document.getElementById("password1").value === document.getElementById("password2").value || document.getElementById("password2").value.length == 0) {
+                document.getElementById("match_text").innerText = "";
+            }
+            else {
+                document.getElementById("match_text").innerText = "Passwords must match!";
+            }
+        }
+
+    </script>
+</body>
+
+
+
+
+
+</html>

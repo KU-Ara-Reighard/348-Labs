@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <h1>
+        <div class="stretch">CSS Edit Page<div>
+    </h1>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <form>
+        <label for="text_width">Text Width</label>
+        <input type="number" id="text_width" name="text_width" value="0">
+        <label for="text_red">Red:</label>
+        <input type="number" id="text_red" name="text_red" value="255" min="0" max="255">
+        <label for="text_green">Green:</label>
+        <input type="number" id="text_green" name="text_green" value="128" min="0" max="255">
+        <label for="text_blue">Blue:</label>
+        <input type="number" id="text_blue" name="text_blue" value="128" min="0" max="255">
+    </form> 
+    <div style="border-style: solid;" id="text" color="rgb(255, 128, 128)">
+        The quick brown fox jumped over the lazy dog.
+        Enter more words here.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+    
+
+    <script>
+        document.getElementById("text_width").oninput = function() {
+            document.getElementById("text").style.letterSpacing = document.getElementById("text_width").value;
+            document.getElementById("text").style.borderWidth = document.getElementById("text_width").value; 
+        };
+
+        document.getElementById("text_red").oninput = function() {rgb();};
+        document.getElementById("text_green").oninput = function() {rgb();};
+        document.getElementById("text_blue").oninput = function() {rgb();};
+
+        function rgb() {
+            new_color = "rgb(" +
+                document.getElementById("text_red").value.toString() + ", " +
+                document.getElementById("text_green").value.toString() + ", " +
+                document.getElementById("text_blue").value.toString() + ")";
+                document.getElementById("text").style.color = new_color;
+                document.getElementById("text").style.borderColor = new_color;
+        }
+
+        rgb()
+    </script>
+</body>
+
+
+
+
+
+</html>
