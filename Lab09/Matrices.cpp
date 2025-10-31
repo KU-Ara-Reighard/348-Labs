@@ -99,6 +99,24 @@ void addMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2) {
     printMatrix(sumMatrix);
 }
 
+void multiplyMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2) {
+    vector<vector<int>> productMatrix;
+
+    for (int row = 0; row < matrix1.size(); row++) {
+        vector<int> newRow;
+        for (int col = 0; col < matrix1.size(); col++) {
+            int product = 0;
+            for (int i = 0; i < matrix1.size(); i++) {
+                product += matrix1.at(i).at(col) * matrix2.at(row).at(i); 
+            }
+            newRow.push_back(product);
+        }
+        productMatrix.push_back(newRow);
+    }
+
+    printMatrix(productMatrix);
+}
+
 void diagonalSum(vector<vector<int>> matrix1) {
     int sum1 = 0;
     for (int i = 0; i < matrix1.size(); i++) {
@@ -170,7 +188,7 @@ int main() {
             addMatrices(matrix1, matrix2);
             break;
         case 2:
-            cout << "not implemented yet :P" << endl;
+            multiplyMatrices(matrix1, matrix2);
             break;
         case 3:
             diagonalSum(matrix1);
