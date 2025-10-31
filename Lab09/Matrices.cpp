@@ -123,6 +123,20 @@ void swapRows(vector<vector<int>> matrix, int index1, int index2) {
     printMatrix(matrix);
 }
 
+void swapColumns(vector<vector<int>> matrix, int index1, int index2) {
+    vector<int> oldRow;
+    for (int row = 0; row < matrix.size(); row++) {
+        oldRow.push_back(matrix.at(row).at(index1));
+        matrix.at(row).at(index1) = matrix.at(row).at(index2);
+    }
+
+    for (int row = 0; row < matrix.size(); row++) {
+        matrix.at(row).at(index2) = oldRow.at(row);
+    }
+
+    printMatrix(matrix);
+}
+
 void changeValue(vector<vector<int>> matrix, int row, int col, int value) {
 
     matrix.at(row).at(col) = value;
@@ -163,16 +177,23 @@ int main() {
             break;
         case 4:
             cout << "Please enter matrix index 1: ";
-            int index1;
-            cin >> index1;
+            int rowIndex1;
+            cin >> rowIndex1;
             cout << "Please enter matrix index 2: ";
-            int index2;
-            cin >> index2;
-            if (index1 < matrix1.size() && index1 >= 0 && index2 < matrix1.size() && index2 >= 0) swapRows(matrix1, index1, index2);
+            int rowIndex2;
+            cin >> rowIndex2;
+            if (rowIndex1 < matrix1.size() && rowIndex1 >= 0 && rowIndex2 < matrix1.size() && rowIndex2 >= 0) swapRows(matrix1, rowIndex1, rowIndex2);
             else cout << "Please enter valid indeces." << endl;
             break;
         case 5:
-            cout << "not implemented yet :P" << endl;
+            cout << "Please enter matrix index 1: ";
+            int colIndex1;
+            cin >> colIndex1;
+            cout << "Please enter matrix index 2: ";
+            int colIndex2;
+            cin >> colIndex2;
+            if (colIndex1 < matrix1.size() && colIndex1 >= 0 && colIndex2 < matrix1.size() && colIndex2 >= 0) swapColumns(matrix1, colIndex1, colIndex2);
+            else cout << "Please enter valid indeces." << endl;
             break;
         case 6:
             cout << "Please enter row: ";
