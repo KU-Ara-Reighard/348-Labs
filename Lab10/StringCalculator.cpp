@@ -37,10 +37,76 @@ vector<string> split(string str, char separator) {
 
 
 string add(string num1, string num2) {
+    bool subtraction = false;
+    bool subtractionSign = false;
+
+    // block to handle subtraction and addition and the signs
+    if (num1[0] == '-' && num2[0] == '-') {
+        subtractionSign = true;
+    }
+
+    if (num2[0] == '+') {
+        num2.erase(0,1);
+    }
+    else if (num2[0] == '-') {
+        subtraction = !subtraction;
+    }
+
+    if (num1[0] == '+') {
+        num1.erase(0,1);
+    }
+    else if (num1[0] == '-') {
+        string tempString = num2;
+        num2 = num1;
+        num1 = tempString;
+        subtraction = !subtraction;
+    }
     
-    return "none";
+    // block to split them by decimal
+    vector<string> num1Split = split(num1, '.');
+    vector<string> num2Split = split(num2, '.');
+    string num1Characteristic = num1Split.at(0);
+    string num1Mantissa = (num1Split.size() == 2) ? num1Split.at(0) : "0";
+    string num2Characteristic = num2Split.at(0);
+    string num2Mantissa = (num2Split.size() == 2) ? num2Split.at(0) : "0";
+
+    
+    // block to make them all the same size
+    while (num1Characteristic.size() < num2Characteristic.size()) {
+        num1Characteristic = "0" + num1Characteristic;
+        // cout << num1Characteristic << endl;
+    }
+    while (num1Characteristic.size() > num2Characteristic.size()) {
+        num2Characteristic = "0" + num2Characteristic;
+        // cout << num2Characteristic << endl;
+    }
+    while (num1Mantissa.size() < num2Mantissa.size()) {
+        num1Mantissa = "0" + num1Mantissa;
+        // cout << num1Characteristic << endl;
+    }
+    while (num1Mantissa.size() > num2Mantissa.size()) {
+        num2Mantissa = "0" + num2Mantissa;
+        // cout << num2Characteristic << endl;
+    }
+
+    cout << "num1Char: " << num1Characteristic << endl;
+    cout << "num2Char: " << num2Characteristic << endl;
+    cout << "num1Man: " << num1Mantissa << endl;
+    cout << "num2Man: " << num2Mantissa << endl;
+    // cout << num1Characteristic + '.' + num1Mantissa << endl;
+    // cout << num2Characteristic + '.' + num2Mantissa << endl;
+
+    
+
+
+
+
+    return "ignore this line";
 }
 
+string recAdd(string num1, string num2) {
+    return "none";
+}
 
 int main() {
     cout << "Enter a file: ";
@@ -59,14 +125,15 @@ int main() {
         regex r(R"((^(\+|\-)?\d+(\.\d+)?\s(\+|\-)?\d+(\.\d+)?))");
         smatch m;
         if (regex_search(line, m, r)) {
-            cout << i + 1 << ": " << add(nums.at(0), nums.at(1)) << endl;
+            // cout << i + 1 << ": " << add(nums.at(0), nums.at(1)) << endl;
+            add(nums.at(0), nums.at(1));
         }
         else cout << "Equation contains invalid numbers." << endl;
 
         // using https://stackoverflow.com/questions/30921932/understanding-c-regex-by-a-simple-example
         // for(auto v: m) cout << i << ": " << v << endl;
 
-        string sum = add(nums.at(0), nums.at(1));
+        string summation = add(nums.at(0), nums.at(1));
 
     }
 
