@@ -46,16 +46,20 @@ string add(string num1, string num2) {
     }
 
     if (num2[0] == '+') {
+        cout << 1 << endl;
         num2.erase(0,1);
     }
     else if (num2[0] == '-') {
+        cout << 2 << endl;
         subtraction = !subtraction;
     }
 
     if (num1[0] == '+') {
+        cout << 3 << endl;
         num1.erase(0,1);
     }
     else if (num1[0] == '-') {
+        cout << 4 << endl;
         string tempString = num2;
         num2 = num1;
         num1 = tempString;
@@ -125,15 +129,18 @@ int main() {
         regex r(R"((^(\+|\-)?\d+(\.\d+)?\s(\+|\-)?\d+(\.\d+)?))");
         smatch m;
         if (regex_search(line, m, r)) {
-            // cout << i + 1 << ": " << add(nums.at(0), nums.at(1)) << endl;
-            add(nums.at(0), nums.at(1));
+            // cout << ":O " << i << endl;
+            cout << i + 1 << ": " << add(nums.at(0), nums.at(1)) << endl;
+            // add(nums.at(0), nums.at(1));
         }
-        else cout << "Equation contains invalid numbers." << endl;
+        else {
+            cout << "Equation contains invalid numbers." << endl;
+        }
 
         // using https://stackoverflow.com/questions/30921932/understanding-c-regex-by-a-simple-example
         // for(auto v: m) cout << i << ": " << v << endl;
 
-        string summation = add(nums.at(0), nums.at(1));
+        // string summation = add(nums.at(0), nums.at(1));
 
     }
 
