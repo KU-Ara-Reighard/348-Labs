@@ -138,7 +138,7 @@ string add(string num1, string num2) {
         }
     }
 
-
+    if (subtractionSign) characteristicSum = ('-' + characteristicSum);
 
     return characteristicSum + '.' + mantissaSum;
 }
