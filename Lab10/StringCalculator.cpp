@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <regex>
+#include <cmath>
 
 using namespace std;
 
@@ -130,10 +131,15 @@ string add(string num1, string num2) {
             if (mantissaSum.size() > mantissaLength) {
                 characteristicSum = to_string(stoi(characteristicSum) - 2);
                 mantissaSum.erase(0,1);
+                cout << mantissaSum << endl;
             }
             else {
                 characteristicSum = to_string(stoi(characteristicSum) - 1);
-                mantissaSum = to_string(1 - stoi(mantissaSum));
+                int powerSize = 1;
+                for (int i=0; i<mantissaLength; i++) {
+                    powerSize *= 10;
+                }
+                mantissaSum = to_string(powerSize - stoi(mantissaSum));
             }
         }
     }
