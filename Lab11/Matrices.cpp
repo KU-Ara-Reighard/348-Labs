@@ -215,19 +215,15 @@ int main() {
 
     switch(stoi(choice)) {
         case 1:
-            cout << 1 << endl;
             matrix + other;
             break;
         case 2:
-            cout << 2 << endl;
             matrix * other;
             break;
         case 3:
-            cout << 3 << endl;
             matrix.diagonalSum();
             break;
         case 4:
-            cout << 4 << endl;
             cout << "Please enter matrix index 1: ";
             int rowIndex1;
             cin >> rowIndex1;
@@ -238,7 +234,6 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         case 5:
-            cout << 5 << endl;
             cout << "Please enter matrix index 1: ";
             int colIndex1;
             cin >> colIndex1;
@@ -249,7 +244,6 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         case 6:
-            cout << 6 << endl;
             cout << "Please enter row: ";
             int row;
             cin >> row;
@@ -263,7 +257,6 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         default:
-            cout << 0 << endl;
             cout << "Please select a different number." << endl;
     }
 
