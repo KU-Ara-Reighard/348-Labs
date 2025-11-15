@@ -33,6 +33,121 @@ vector<string> split(string str, char separator) {
     return strings;
 }
 
+class Matrix {
+
+    private:
+        vector<vector<int>> matrix;
+    public:
+        
+
+        Matrix(vector<vector<int>> newGrid) {
+            matrix = newGrid;
+        }
+
+        void printMatrix() {
+            for (int row = 0; row < matrix.size(); row++) {
+                for (int col = 0; col < matrix.size(); col++) {
+                    // adds an extra 0 to the word if needed
+                    if (matrix.at(row).at(col) <= 9) cout << 0;
+                    cout << matrix.at(row).at(col) << " ";
+                }
+                cout << "\n";
+            }
+        }
+
+        int size() {
+            return matrix.size();
+        }
+
+        vector<vector<int>> getMatrix() {
+            return this->matrix;
+        }
+
+        void operator+(Matrix other) {
+            vector<vector<int>> sumMatrix;
+    
+            for (int row = 0; row < this->matrix.size(); row++) {
+                vector<int> newRow;
+                for (int col = 0; col < matrix.size(); col++) {
+                    newRow.push_back(matrix.at(row).at(col) + other.getMatrix().at(row).at(col));
+                }
+                sumMatrix.push_back(newRow);
+            }
+            Matrix newMatrix(sumMatrix);
+            newMatrix.printMatrix();
+        }
+
+        void operator*(Matrix other) {
+            vector<vector<int>> productMatrix;
+            
+            for (int row = 0; row < matrix.size(); row++) {
+                vector<int> newRow;
+                for (int col = 0; col < matrix.size(); col++) {
+                    int product = 0;
+                    for (int i = 0; i < matrix.size(); i++) {
+                        product += matrix.at(i).at(col) * other.getMatrix().at(row).at(i); 
+                    }
+                    newRow.push_back(product);
+                }
+                productMatrix.push_back(newRow);
+            }
+            
+            Matrix newMatrix(productMatrix);
+            newMatrix.printMatrix();
+        }
+
+        void diagonalSum() {
+            int sum1 = 0;
+            for (int i = 0; i < matrix.size(); i++) {
+                sum1 += matrix.at(i).at(i);
+            }
+            cout << "Main Diagonal Sum: " << sum1 << endl;
+            
+            int sum2 = 0;
+            for (int i = 0; i < matrix.size(); i++) {
+                sum2 += matrix.at(i).at(matrix.size() - 1 - i);
+            }
+            cout << "Secondary Diagonal Sum: " << sum2 << endl;
+            
+            cout << "Sum of Diagonal Sums: " << sum1 + sum2 << endl;
+        }
+
+        void swapRows(int index1, int index2) {
+            vector<int> oldRow = matrix.at(index1);
+            matrix.at(index1) = matrix.at(index2);
+            matrix.at(index2) = oldRow;
+            
+            printMatrix();
+        }
+
+        void swapColumns(int index1, int index2) {
+            vector<int> oldRow;
+            for (int row = 0; row < matrix.size(); row++) {
+                oldRow.push_back(matrix.at(row).at(index1));
+                matrix.at(row).at(index1) = matrix.at(row).at(index2);
+            }
+            
+            for (int row = 0; row < matrix.size(); row++) {
+                matrix.at(row).at(index2) = oldRow.at(row);
+            }
+            
+            printMatrix();
+        }
+
+        void changeValue(int row, int col, int value) {
+            
+            matrix.at(row).at(col) = value;
+            printMatrix();
+        }
+};
+
+
+
+
+
+
+
+
 
 
 vector<vector<vector<int>>> readFile() {
@@ -75,102 +190,16 @@ vector<vector<vector<int>>> readFile() {
     return matrices;
 }
 
-void printMatrix(vector<vector<int>> matrix) {
-    for (int row = 0; row < matrix.size(); row++) {
-        for (int col = 0; col < matrix.size(); col++) {
-            // adds an extra 0 to the word if needed
-            if (matrix.at(row).at(col) <= 9) cout << 0;
-            cout << matrix.at(row).at(col) << " ";
-        }
-        cout << "\n";
-    }
-}
-
-void addMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2) {
-    vector<vector<int>> sumMatrix;
-
-    for (int row = 0; row < matrix1.size(); row++) {
-        vector<int> newRow;
-        for (int col = 0; col < matrix1.size(); col++) {
-            newRow.push_back(matrix1.at(row).at(col) + matrix2.at(row).at(col));
-        }
-        sumMatrix.push_back(newRow);
-    }
-    printMatrix(sumMatrix);
-}
-
-void multiplyMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2) {
-    vector<vector<int>> productMatrix;
-
-    for (int row = 0; row < matrix1.size(); row++) {
-        vector<int> newRow;
-        for (int col = 0; col < matrix1.size(); col++) {
-            int product = 0;
-            for (int i = 0; i < matrix1.size(); i++) {
-                product += matrix1.at(i).at(col) * matrix2.at(row).at(i); 
-            }
-            newRow.push_back(product);
-        }
-        productMatrix.push_back(newRow);
-    }
-
-    printMatrix(productMatrix);
-}
-
-void diagonalSum(vector<vector<int>> matrix1) {
-    int sum1 = 0;
-    for (int i = 0; i < matrix1.size(); i++) {
-        sum1 += matrix1.at(i).at(i);
-    }
-    cout << "Main Diagonal Sum: " << sum1 << endl;
-
-    int sum2 = 0;
-    for (int i = 0; i < matrix1.size(); i++) {
-        sum2 += matrix1.at(i).at(matrix1.size() - 1 - i);
-    }
-    cout << "Secondary Diagonal Sum: " << sum2 << endl;
-
-    cout << "Sum of Diagonal Sums: " << sum1 + sum2 << endl;
-}
-
-void swapRows(vector<vector<int>> matrix, int index1, int index2) {
-    vector<int> oldRow = matrix.at(index1);
-    matrix.at(index1) = matrix.at(index2);
-    matrix.at(index2) = oldRow;
-
-    printMatrix(matrix);
-}
-
-void swapColumns(vector<vector<int>> matrix, int index1, int index2) {
-    vector<int> oldRow;
-    for (int row = 0; row < matrix.size(); row++) {
-        oldRow.push_back(matrix.at(row).at(index1));
-        matrix.at(row).at(index1) = matrix.at(row).at(index2);
-    }
-
-    for (int row = 0; row < matrix.size(); row++) {
-        matrix.at(row).at(index2) = oldRow.at(row);
-    }
-
-    printMatrix(matrix);
-}
-
-void changeValue(vector<vector<int>> matrix, int row, int col, int value) {
-
-    matrix.at(row).at(col) = value;
-    printMatrix(matrix);
-}
-
 int main() {
 
     vector<vector<vector<int>>> matrices;
     matrices = readFile();
-    vector<vector<int>> matrix1 = matrices.at(0);
-    vector<vector<int>> matrix2 = matrices.at(0);
+    Matrix matrix(matrices.at(0));
+    Matrix other(matrices.at(1));
 
-    printMatrix(matrix1);
+    matrix.printMatrix();
     cout << endl;
-    printMatrix(matrix2);
+    other.printMatrix();
     cout << endl;
 
     cout << "1. Add two matrices and display the result" << endl;
@@ -185,13 +214,13 @@ int main() {
 
     switch(stoi(choice)) {
         case 1:
-            addMatrices(matrix1, matrix2);
+            matrix + other;
             break;
         case 2:
-            multiplyMatrices(matrix1, matrix2);
+            matrix * other;
             break;
         case 3:
-            diagonalSum(matrix1);
+            matrix.diagonalSum();
             break;
         case 4:
             cout << "Please enter matrix index 1: ";
@@ -200,7 +229,7 @@ int main() {
             cout << "Please enter matrix index 2: ";
             int rowIndex2;
             cin >> rowIndex2;
-            if (rowIndex1 < matrix1.size() && rowIndex1 >= 0 && rowIndex2 < matrix1.size() && rowIndex2 >= 0) swapRows(matrix1, rowIndex1, rowIndex2);
+            if (rowIndex1 < matrix.size() && rowIndex1 >= 0 && rowIndex2 < matrix.size() && rowIndex2 >= 0) matrix.swapRows(rowIndex1, rowIndex2);
             else cout << "Please enter valid indeces." << endl;
             break;
         case 5:
@@ -210,7 +239,7 @@ int main() {
             cout << "Please enter matrix index 2: ";
             int colIndex2;
             cin >> colIndex2;
-            if (colIndex1 < matrix1.size() && colIndex1 >= 0 && colIndex2 < matrix1.size() && colIndex2 >= 0) swapColumns(matrix1, colIndex1, colIndex2);
+            if (colIndex1 < matrix.size() && colIndex1 >= 0 && colIndex2 < matrix.size() && colIndex2 >= 0) matrix.swapColumns(colIndex1, colIndex2);
             else cout << "Please enter valid indeces." << endl;
             break;
         case 6:
@@ -223,7 +252,7 @@ int main() {
             cout << "Please enter value: ";
             int value;
             cin >> value;
-            if (row < matrix1.size() && row >= 0 && col < matrix1.size() && col >= 0) changeValue(matrix1, row, col, value);
+            if (row < matrix.size() && row >= 0 && col < matrix.size() && col >= 0) matrix.changeValue(row, col, value);
             else cout << "Please enter valid indeces." << endl;
             break;
         default:
