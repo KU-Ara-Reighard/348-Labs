@@ -45,11 +45,11 @@ class Matrix {
         }
 
         void printMatrix() {
-            for (int row = 0; row < matrix.size(); row++) {
-                for (int col = 0; col < matrix.size(); col++) {
+            for (int row = 0; row < this->matrix.size(); row++) {
+                for (int col = 0; col < this->matrix.size(); col++) {
                     // adds an extra 0 to the word if needed
-                    if (matrix.at(row).at(col) <= 9) cout << 0;
-                    cout << matrix.at(row).at(col) << " ";
+                    if (this->matrix.at(row).at(col) <= 9) cout << 0;
+                    cout << this->matrix.at(row).at(col) << " ";
                 }
                 cout << "\n";
             }
@@ -185,6 +185,7 @@ vector<vector<vector<int>>> readFile() {
         }
         newerMatrix.push_back(newRow);
     }
+    matrices.push_back(newerMatrix);
 
     file.close();
     return matrices;
@@ -214,15 +215,19 @@ int main() {
 
     switch(stoi(choice)) {
         case 1:
+            cout << 1 << endl;
             matrix + other;
             break;
         case 2:
+            cout << 2 << endl;
             matrix * other;
             break;
         case 3:
+            cout << 3 << endl;
             matrix.diagonalSum();
             break;
         case 4:
+            cout << 4 << endl;
             cout << "Please enter matrix index 1: ";
             int rowIndex1;
             cin >> rowIndex1;
@@ -233,6 +238,7 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         case 5:
+            cout << 5 << endl;
             cout << "Please enter matrix index 1: ";
             int colIndex1;
             cin >> colIndex1;
@@ -243,6 +249,7 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         case 6:
+            cout << 6 << endl;
             cout << "Please enter row: ";
             int row;
             cin >> row;
@@ -256,6 +263,7 @@ int main() {
             else cout << "Please enter valid indeces." << endl;
             break;
         default:
+            cout << 0 << endl;
             cout << "Please select a different number." << endl;
     }
 
